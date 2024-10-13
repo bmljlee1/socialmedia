@@ -1,4 +1,9 @@
-export default function PostFormInput({ onChange, name, placeholder, type }) {
+export default function CommentFormInput({
+  onChange,
+  name,
+  placeholder,
+  type,
+}) {
   return (
     <input
       name={name}

@@ -1,7 +1,5 @@
 "use client";
 import PostFormInput from "./components/PostFormInput";
-import { auth } from "@clerk/nextjs/server";
-import { connect } from "@/lib/connect";
 import { useState } from "react";
 
 export default function PostForm({ handleSubmit }) {
@@ -9,11 +7,19 @@ export default function PostForm({ handleSubmit }) {
     content: "",
   });
 
-  // create handlechange function.
+  function handleChange(event) {
+    const { name, value } = event.target;
 
-  const { userId } = auth();
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
 
-  const db = connect();
+    const isFormComplete = Object.values({ ...formData, [name]: value }).every(
+      (field) => field.length > 0 || field > 0
+    );
+    setIsDisabled(!isFormComplete);
+  }
 
   async function handleFormSubmit(event) {
     event.preventDefault();
@@ -27,7 +33,7 @@ export default function PostForm({ handleSubmit }) {
   return (
     <>
       <div>{formData.content}</div>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <PostFormInput
           onChange={handleChange}
           name="content"

@@ -15,7 +15,12 @@ export default async function ProfilePage() {
     const lastName = formData.get("lastName");
     const bio = formData.get("bio");
 
+    const profiles = await db.query(
+      `SELECT * FROM week9projectprofiles WHERE clerk_id = $1`,
+      [userId]
+    );
     console.log(profiles.rows);
+
     if (profiles.rowCount === 0) {
       // insert our profile into the DB
       await db.query(
@@ -36,6 +41,7 @@ export default async function ProfilePage() {
     `SELECT * FROM week9projectprofiles WHERE clerk_id = $1`,
     [userId]
   );
+  console.log(profiles.rows);
 
   return (
     <>
