@@ -30,3 +30,7 @@ export default function LikeButton({
     </div>
   );
 }
+
+// when we like a users post - that seems to reset/modify the other users post
+// carol is working -
+// something to do with when a user has multple posts.
