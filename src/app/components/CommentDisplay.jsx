@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function CommentDisplay({ postId, userId, serverAction }) {
+export default function CommentDisplay({ postId, serverAction }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
